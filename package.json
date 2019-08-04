@@ -1,0 +1,16 @@
+{
+  "name": "twitch-chatbot",
+  "version": "1.0.0",
+  "description": "a twitch messaging interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "webv3",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "rxjs": "^6.5.2",
+    "tmi.js": "^1.4.5"
+  }
+}
