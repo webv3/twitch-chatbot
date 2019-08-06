@@ -1,16 +1,16 @@
-
 const followage = require('./followage');
 
 class Command{
 
     constructor(){
+
         this.commandList = {
             followage: {
                 followMode: true,
                 subMode: false,
                 timeout: 0,
                 exec: ( commandObj, user, dependencies ) =>{
-                    followage.run(commandObj, user, dependencies);
+                    followage.run(commandObj, user, dependencies['chat']);
                 }
             }
         }

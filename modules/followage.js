@@ -2,11 +2,8 @@ const twitchHelixApi = require('./twitch-helix-api');
 const moment = require('moment');
 const botmessage = require('./bot-message');
 
-
 class Followage{
 
-    constructor(){}
-    
     //retorna o numero de dias que @userName segue o canal, ou false em caso de erro
     async _getFollowageDays(userName) {
         
@@ -26,7 +23,7 @@ class Followage{
 
 
     //execulta a funcao principal do command followage
-    run( commandObj, user, dependencies ){
+    run( commandObj, user, chatInstance ){
         const userName = user['display-name'];
 
         this._getFollowageDays(userName).then(followDays=>{
@@ -36,12 +33,13 @@ class Followage{
                 {name: 'userName', value: userName},
                 {name: 'days', value: followDays}
             ];
-            dependencies.tmiClient.action('webv3', botmessage.getMessage('followage',vars));
+            chatInstance.addMessage(botmessage.getMessage('followage',vars));
         }).catch(err=>{
             console.log(err);
         })
     }
-
+    
 }
+
 
 module.exports = new Followage();

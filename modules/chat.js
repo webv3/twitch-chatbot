@@ -4,23 +4,17 @@ const command = require('./command');
 class Chat {
 
     constructor(tmiClient) {
-
+        
         this.tmiClient = tmiClient;
 
         //fila de msg para ser exibida no chat
         this.msgQueue = [];
 
-        //tempo de intervalo das interacoes do chatLoop
+        //tempo intervalo das interacoes do chatLoop
         this.loopInterval = 2000;
         
         //intervalo das interacoes do chat para evitar block por spam
         this.chatLoop = this.startLoop();
-        
-        tmiClient.on("chat", (channel, user, msg, self) => {
-            const commandObj = command.validate(msg, user);
-            command.exec(commandObj, user, {tmiClient});
-        });
-
     }
 
 
