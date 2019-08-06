@@ -31,11 +31,11 @@ class TwitchHelixApi {
         return new Promise((resolv, reject) => {
             this._get(`users?login=${userName}`).then(res => {
                 if (res.response.statusCode != 200) {
-                    reject({function:'getUserInfo',err: res.body});
+                    reject(res.body);
                     return;
                 }
                 resolv(res.body);
-            }).catch(err=>reject({function:'getUserInfo',err}));
+            }).catch(err=>reject(err));
         });
     }
 
@@ -45,13 +45,12 @@ class TwitchHelixApi {
     getFollowedDate(userId, channelId = this.channelId) {
         return new Promise((resolv, reject) => {
             this._get(`users/follows?from_id=${userId}&to_id=${channelId}`).then(res=>{
-                console.log('++++++ ',res.response.statusCode);
                 if (res.response.statusCode != 200 || !res.body.total) {
-                    reject({function:'getFollowedDate',err: res.body});
+                    reject(res.body);
                     return false;
                 }
                 resolv(res.body.data[0].followed_at);
-            }).catch(err=>reject({function:'getFollowedDate',err}));
+            }).catch(err=>reject(err));
         });
     }
 
