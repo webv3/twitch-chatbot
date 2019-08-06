@@ -6,7 +6,6 @@ class Followage{
 
     //retorna o numero de dias que @userName segue o canal, ou false em caso de erro
     async _getFollowageDays(userName) {
-        
         try {
             let userInfo = await twitchHelixApi.getUserInfo(userName);
             userInfo = userInfo.data[0];
@@ -27,8 +26,7 @@ class Followage{
         const userName = user['display-name'];
 
         this._getFollowageDays(userName).then(followDays=>{
-            console.log(followDays);
-            if(!followDays) return;
+            if(! Number.isInteger(followDays) ) return;
             const vars = [
                 {name: 'userName', value: userName},
                 {name: 'days', value: followDays}
@@ -36,7 +34,7 @@ class Followage{
             chatInstance.addMessage(botmessage.getMessage('followage',vars));
         }).catch(err=>{
             console.log(err);
-        })
+        });
     }
     
 }
